@@ -333,6 +333,101 @@ h4.sub{font-family:var(--display);margin:18px 0 10px;font-size:18px;color:#463f5
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);}
 .reveal.in{opacity:1;transform:none;}
 
+/* ============ CHAPTER ACCORDION (板块收纳) ============ */
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin:18px 0;align-items:stretch;}
+.chapter{margin:0;border-radius:24px;background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--line);box-shadow:var(--shadow-sm);overflow:hidden;transition:transform .35s,box-shadow .35s;display:flex;flex-direction:column;position:relative;}
+.chapter.open{grid-column:1/-1;box-shadow:0 28px 54px -32px rgba(150,120,180,.55);}
+.chapter:not(.open):hover{transform:translateY(-6px) scale(1.01);box-shadow:0 26px 50px -22px rgba(150,120,180,.48);}
+
+/* collapsed = chapter cover card */
+.ch-head{display:flex;align-items:center;gap:14px;width:100%;border:none;background:transparent;cursor:pointer;padding:22px 26px;font-family:inherit;text-align:left;color:#4a4258;transition:.25s;flex:1;position:relative;}
+.ch-head:hover{background:rgba(255,255,255,.45);}
+.ch-water{position:absolute;right:-8px;bottom:-34px;font-family:var(--display);font-weight:800;font-size:150px;line-height:1;color:var(--accent);opacity:.12;pointer-events:none;user-select:none;transition:opacity .3s;}
+.ch-idx{font-family:var(--display);font-size:13px;font-weight:800;color:var(--accent);background:var(--accent-soft);border-radius:12px;padding:9px 12px;flex:none;letter-spacing:.04em;white-space:nowrap;transition:.25s;}
+.ch-emoji{font-size:54px;line-height:1;filter:drop-shadow(0 10px 18px rgba(150,120,180,.28));transition:transform .3s;}
+.chapter:not(.open):hover .ch-emoji{transform:scale(1.08) translateY(-3px);}
+.ch-meta{display:flex;flex-direction:column;min-width:0;flex:1;}
+.ch-tag{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:2.6px;color:var(--accent);text-transform:uppercase;}
+.ch-ttl{font-size:21px;font-weight:800;color:#4a4258;line-height:1.15;}
+.ch-sub{font-size:13px;color:var(--muted);margin-top:3px;}
+.ch-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:14px;}
+.ch-chip{font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid var(--line);color:var(--ink);box-shadow:var(--shadow-sm);}
+.ch-chev{margin-left:auto;width:38px;height:38px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);transition:transform .4s cubic-bezier(.2,.7,.3,1);}
+.ch-chev svg{width:21px;height:21px;}
+.chapter.open .ch-chev{transform:rotate(180deg);}
+
+/* collapsed card layout */
+.chapter:not(.open) .ch-head{flex-direction:column;align-items:flex-start;padding:26px 24px 24px;min-height:260px;height:100%;}
+.chapter:not(.open) .ch-water{opacity:.12;}
+.chapter:not(.open) .ch-idx{position:absolute;top:14px;left:14px;font-size:11px;padding:6px 9px;opacity:.78;}
+.chapter:not(.open) .ch-emoji{margin-bottom:14px;}
+.chapter:not(.open) .ch-tag{display:block;}
+.chapter:not(.open) .ch-ttl{font-size:clamp(20px,2.4vw,25px);margin-top:4px;}
+.chapter:not(.open) .ch-sub{font-size:13px;margin-top:9px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.chapter:not(.open) .ch-chips{display:flex;}
+.chapter:not(.open) .ch-chev{display:none;}
+
+/* expanded = compact bar */
+.chapter.open .ch-head{flex-direction:row;text-align:left;padding:22px 26px;min-height:auto;}
+.chapter.open .ch-water{display:none;}
+.chapter.open .ch-idx{display:block;position:static;opacity:1;font-size:13px;padding:9px 12px;}
+.chapter.open .ch-emoji{font-size:24px;width:42px;height:42px;display:grid;place-items:center;background:var(--accent-soft);border-radius:14px;margin:0 14px 0 0;}
+.chapter.open .ch-tag{display:none;}
+.chapter.open .ch-ttl{font-size:21px;}
+.chapter.open .ch-sub{display:none;}
+.chapter.open .ch-chips{display:none;}
+.chapter.open .ch-chev{display:grid;}
+
+.ch-body{display:none;padding:2px 26px 26px;}
+.chapter.open .ch-body{display:block;animation:chFade .5s ease both;}
+.ch-body section{padding-top:22px;padding-bottom:6px;scroll-margin-top:90px;}
+@keyframes chFade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+/* chapter cover card accent colors */
+.chapter-grid .chapter:nth-child(1){--accent:var(--lav);--accent-soft:var(--lav-s);}
+.chapter-grid .chapter:nth-child(2){--accent:var(--sky);--accent-soft:var(--sky-s);}
+.chapter-grid .chapter:nth-child(3){--accent:var(--mint);--accent-soft:var(--mint-s);}
+.chapter-grid .chapter:nth-child(4){--accent:var(--peach);--accent-soft:var(--peach-s);}
+.chapter-grid .chapter:nth-child(5){--accent:var(--pink);--accent-soft:var(--pink-s);}
+.chapter-grid .chapter:nth-child(6){--accent:var(--sage);--accent-soft:var(--sage-s);}
+.chapter-grid .chapter:nth-child(7){--accent:var(--cyan);--accent-soft:var(--cyan-s);}
+
+/* ===== RICH CONTENT: chapter intro / stat callouts / color variety ===== */
+/* stat callouts */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:4px 0 26px;}
+.stat{background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--line);border-radius:18px;padding:18px 14px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .3s;}
+.stat:hover{transform:translateY(-5px);}
+.stat b{display:block;font-family:var(--display);font-size:clamp(26px,3.2vw,38px);font-weight:800;line-height:1;background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 50%,#4a4458));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.stat span{display:block;margin-top:8px;font-size:12.5px;color:var(--muted);font-weight:600;}
+/* per-section accent variety (break the uniform rhythm) */
+.ch-body>section:nth-of-type(8n+1) .sec-ico{background:var(--pink-s)!important;color:var(--pink)!important;}
+.ch-body>section:nth-of-type(8n+2) .sec-ico{background:var(--coral-s)!important;color:var(--coral)!important;}
+.ch-body>section:nth-of-type(8n+3) .sec-ico{background:var(--peach-s)!important;color:var(--peach)!important;}
+.ch-body>section:nth-of-type(8n+4) .sec-ico{background:var(--lav-s)!important;color:var(--lav)!important;}
+.ch-body>section:nth-of-type(8n+5) .sec-ico{background:var(--mint-s)!important;color:var(--mint)!important;}
+.ch-body>section:nth-of-type(8n+6) .sec-ico{background:var(--sky-s)!important;color:var(--sky)!important;}
+.ch-body>section:nth-of-type(8n+7) .sec-ico{background:var(--sage-s)!important;color:var(--sage)!important;}
+.ch-body>section:nth-of-type(8n+0) .sec-ico{background:var(--cyan-s)!important;color:var(--cyan)!important;}
+.ch-body>section:nth-of-type(8n+1) .eyebrow{color:var(--pink);}
+.ch-body>section:nth-of-type(8n+2) .eyebrow{color:var(--coral);}
+.ch-body>section:nth-of-type(8n+3) .eyebrow{color:var(--peach);}
+.ch-body>section:nth-of-type(8n+4) .eyebrow{color:var(--lav);}
+.ch-body>section:nth-of-type(8n+5) .eyebrow{color:var(--mint);}
+.ch-body>section:nth-of-type(8n+6) .eyebrow{color:var(--sky);}
+.ch-body>section:nth-of-type(8n+7) .eyebrow{color:var(--sage);}
+.ch-body>section:nth-of-type(8n+0) .eyebrow{color:var(--cyan);}
+/* colorful card icons (torikorean-style icon grid) */
+.ch-body .grid>.card:nth-child(8n+1) .ic{background:var(--pink-s)!important;color:var(--pink)!important;}
+.ch-body .grid>.card:nth-child(8n+2) .ic{background:var(--coral-s)!important;color:var(--coral)!important;}
+.ch-body .grid>.card:nth-child(8n+3) .ic{background:var(--peach-s)!important;color:var(--peach)!important;}
+.ch-body .grid>.card:nth-child(8n+4) .ic{background:var(--lav-s)!important;color:var(--lav)!important;}
+.ch-body .grid>.card:nth-child(8n+5) .ic{background:var(--mint-s)!important;color:var(--mint)!important;}
+.ch-body .grid>.card:nth-child(8n+6) .ic{background:var(--sky-s)!important;color:var(--sky)!important;}
+.ch-body .grid>.card:nth-child(8n+7) .ic{background:var(--sage-s)!important;color:var(--sage)!important;}
+.ch-body .grid>.card:nth-child(8n+0) .ic{background:var(--cyan-s)!important;color:var(--cyan)!important;}
+/* sub-heading modules */
+.ch-body .sub{position:relative;padding-left:15px;border-left:4px solid var(--accent);}
+
 @media(max-width:980px){
   .ov-grid{grid-template-columns:1fr;}
   .ring-card{position:static;}
@@ -361,11 +456,34 @@ h4.sub{font-family:var(--display);margin:18px 0 10px;font-size:18px;color:#463f5
   .sec{font-size:27px;gap:12px;}
   .sec .sec-ico{width:44px;height:44px;}
   .bank-grid{grid-template-columns:1fr;}
+  .chapter-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .chapter:not(.open) .ch-head{padding:18px 14px 16px;min-height:200px;}
+  .chapter:not(.open) .ch-water{font-size:110px;right:-4px;bottom:-24px;}
+  .chapter:not(.open) .ch-emoji{font-size:42px;margin-bottom:10px;}
+  .chapter:not(.open) .ch-tag{font-size:9px;letter-spacing:2px;}
+  .chapter:not(.open) .ch-ttl{font-size:16px;}
+  .chapter:not(.open) .ch-sub{font-size:11px;margin-top:6px;line-height:1.5;-webkit-line-clamp:2;}
+  .chapter:not(.open) .ch-chips{display:none;}
+  .chapter:not(.open) .ch-idx{font-size:10px;padding:5px 7px;top:8px;left:8px;}
+  .chapter.open{grid-column:1/-1;}
+  .chapter.open .ch-head{padding:18px 16px;gap:11px;}
+  .chapter.open .ch-emoji{font-size:20px;width:34px;height:34px;border-radius:10px;margin-right:10px;}
+  .chapter.open .ch-ttl{font-size:18px;}
+  .ch-body{padding:2px 16px 20px;}
+  .ch-body section{padding-top:16px;}
 }
 @media print{
   .decor,.migration,.carousel-wm,.topnav,.totop,.flagbar,.subtabs,.seg,.btn,.pbar,.scroll-cue{display:none!important;}
   body{background:#fff;}
   .glass,.card{box-shadow:none;backdrop-filter:none;background:#fff;border:1px solid #ddd;}
+  .chapter{box-shadow:none!important;overflow:visible!important;border:1px solid #ddd;}
+  .chapter .ch-body{display:block!important;animation:none!important;}
+  .ch-chev{display:none!important;}
+}
+
+@media(max-width:640px){
+  .stats{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .stat{padding:14px 10px;}
 }
 
 /* ===== COUNTRY BRIEF ACCORDION ===== */
@@ -491,19 +609,14 @@ h4.sub{font-family:var(--display);margin:18px 0 10px;font-size:18px;color:#463f5
 <nav class="topnav">
   <div class="brand"><span class="dot"></span>新岸<span class="brand-en">NewShore</span></div>
   <div class="navpills" id="navpills">
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#hero" class="active">封面</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#overview">概论</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#explorer">国家指南</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#bank">银行开户</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#sim">手机卡</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#remit">汇款</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#work">打工规则</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#parttime">学生兼职</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#whv">WHV</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#apply">申请文书</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#rental">租房</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#tips">生活锦囊</a>
-    <a href="file:///C:/Users/ASUS/WorkBuddy/2026-07-13-20-45-24/%E6%96%B0%E5%B2%B8.html#contact">联系</a>
+    <a href="#hero" class="active">封面</a>
+    <a href="#ch1">行前准备</a>
+    <a href="#ch2">国家指南</a>
+    <a href="#ch3">落地必办</a>
+    <a href="#ch4">工作签证</a>
+    <a href="#ch5">申请选校</a>
+    <a href="#ch6">生活落地</a>
+    <a href="#ch7">联系</a>
   </div>
   <div class="pbar"><i id="pbar" style="width: 0%;"></i></div>
 </nav>
@@ -533,7 +646,7 @@ h4.sub{font-family:var(--display);margin:18px 0 10px;font-size:18px;color:#463f5
       </div>
       <div class="hero-stats">
         <div class="hstat"><b>11</b><span>覆盖国家</span></div>
-        <div class="hstat"><b>9</b><span>指南板块</span></div>
+        <div class="hstat"><b>7</b><span>大模块</span></div>
         <div class="hstat"><b>4</b><span>文书模板</span></div>
         <div class="hstat"><b>3</b><span>流程图</span></div>
       </div>
@@ -544,6 +657,27 @@ h4.sub{font-family:var(--display);margin:18px 0 10px;font-size:18px;color:#463f5
     </div>
   </section>
 
+  <div class="chapter-grid">
+  <div class="chapter open" id="ch1">
+    <button class="ch-head" onclick="toggleChapter('ch1')" aria-expanded="true">
+      <span class="ch-water">01</span>
+      <span class="ch-idx">01</span>
+      <span class="ch-emoji">🎒</span>
+      <span class="ch-meta">
+        <span class="ch-tag">CHAPTER 01</span>
+        <span class="ch-ttl">行前准备 · 落地倒计时</span>
+        <span class="ch-sub">出发前逐项打勾，关掉网页再打开进度不丢。三阶段覆盖「落地前 7 天 → 当天 → 第一周」。</span>
+        <span class="ch-chips">
+        <span class="ch-chip">📋 倒计时清单</span>
+        <span class="ch-chip">🔔 进度圆环</span>
+        <span class="ch-chip">💾 本地自动保存</span>
+        </span>
+      </span>
+      <span class="ch-chev"><svg class="ico-svg"><use href="#ic-tick"/></svg></span>
+    </button>
+
+<div class="ch-body">
+    
   <!-- ===== OVERVIEW / 概论 ===== -->
   <section id="overview">
     <div class="eyebrow reveal">Landing Countdown</div>
@@ -564,7 +698,29 @@ h4.sub{font-family:var(--display);margin:18px 0 10px;font-size:18px;color:#463f5
       <div class="checkgrid reveal" id="checkgrid"><div class="checkcol glass"><h4><span class="ic"><svg class="ico-svg"><use href="#ic-doc"></use></svg></span>落地前 7 天</h4><div class="ck " onclick="toggleCK(&#39;0-0&#39;)"><span class="box"></span><div><div>护照/签证/录取信 扫描备份</div><small>云盘+U盘+家人各一份</small></div></div><div class="ck " onclick="toggleCK(&#39;0-1&#39;)"><span class="box"></span><div><div>换汇 + 开通 Wise/银行卡</div><small>准备启动资金</small></div></div><div class="ck " onclick="toggleCK(&#39;0-2&#39;)"><span class="box"></span><div><div>机票 + 接机预约</div><small>学校接机或网约车</small></div></div><div class="ck done" onclick="toggleCK(&#39;0-3&#39;)"><span class="box">✓</span><div><div>住宿确认(宿舍/短租)</div><small>落地第一晚有着落</small></div></div><div class="ck done" onclick="toggleCK(&#39;0-4&#39;)"><span class="box">✓</span><div><div>买手机卡/eSIM</div><small>落地即用</small></div></div><div class="ck " onclick="toggleCK(&#39;0-5&#39;)"><span class="box"></span><div><div>体检/疫苗/医保</div><small>按国要求</small></div></div></div><div class="checkcol glass"><h4><span class="ic"><svg class="ico-svg"><use href="#ic-pin"></use></svg></span>落地当天</h4><div class="ck " onclick="toggleCK(&#39;1-0&#39;)"><span class="box"></span><div><div>入境通关 + 领签证/在留卡</div><small>材料随身带</small></div></div><div class="ck " onclick="toggleCK(&#39;1-1&#39;)"><span class="box"></span><div><div>办本地电话卡</div><small>拿地址证明</small></div></div><div class="ck " onclick="toggleCK(&#39;1-2&#39;)"><span class="box"></span><div><div>去银行开户</div><small>带护照/签证/地址</small></div></div><div class="ck " onclick="toggleCK(&#39;1-3&#39;)"><span class="box"></span><div><div>办交通卡</div><small>地铁/公交</small></div></div><div class="ck " onclick="toggleCK(&#39;1-4&#39;)"><span class="box"></span><div><div>采购日用品</div><small>超市/药妆</small></div></div><div class="ck " onclick="toggleCK(&#39;1-5&#39;)"><span class="box"></span><div><div>报平安 + 注册学校</div><small>国际处报到</small></div></div></div><div class="checkcol glass"><h4><span class="ic"><svg class="ico-svg"><use href="#ic-house"></use></svg></span>落地第一周</h4><div class="ck " onclick="toggleCK(&#39;2-0&#39;)"><span class="box"></span><div><div>办地址证明/银行激活</div><small>收实体卡</small></div></div><div class="ck " onclick="toggleCK(&#39;2-1&#39;)"><span class="box"></span><div><div>办学生证/交通优惠</div><small>学生折扣</small></div></div><div class="ck " onclick="toggleCK(&#39;2-2&#39;)"><span class="box"></span><div><div>开通水电网络</div><small>租房账单</small></div></div><div class="ck " onclick="toggleCK(&#39;2-3&#39;)"><span class="box"></span><div><div>熟悉校区/超市/医院</div><small>踩点</small></div></div><div class="ck " onclick="toggleCK(&#39;2-4&#39;)"><span class="box"></span><div><div>加入学联/社群</div><small>社交支持</small></div></div><div class="ck " onclick="toggleCK(&#39;2-5&#39;)"><span class="box"></span><div><div>了解打工规则</div><small>合规打工</small></div></div><div class="ck " onclick="toggleCK(&#39;2-6&#39;)"><span class="box"></span><div><div>预约医保/体检</div><small>保障</small></div></div></div></div>
     </div>
   </section>
+    </div>
+  </div>
 
+  <div class="chapter" id="ch2">
+    <button class="ch-head" onclick="toggleChapter('ch2')" aria-expanded="false">
+      <span class="ch-water">02</span>
+      <span class="ch-idx">02</span>
+      <span class="ch-emoji">🌏</span>
+      <span class="ch-meta">
+        <span class="ch-tag">CHAPTER 02</span>
+        <span class="ch-ttl">国家指南 · 11 国一键切换</span>
+        <span class="ch-sub">横滑选国家，立刻展开它专属的签证、材料、租房、银行、打工全攻略。</span>
+        <span class="ch-chips">
+        <span class="ch-chip">🇺🇸 11 国</span>
+        <span class="ch-chip">📑 签证材料</span>
+        <span class="ch-chip">🏠 租房银行打工</span>
+        </span>
+      </span>
+      <span class="ch-chev"><svg class="ico-svg"><use href="#ic-globe"/></svg></span>
+    </button>
+
+<div class="ch-body">
+    
   <!-- ===== COUNTRY EXPLORER ===== -->
   <section id="explorer">
     <div class="eyebrow reveal">Country-by-Country</div>
@@ -604,7 +760,29 @@ h4.sub{font-family:var(--display);margin:18px 0 10px;font-size:18px;color:#463f5
      <div class="call warn"><span class="ci">🚨</span><div>F-1 校外打工须先获批 CPT/OPT，否则违法。</div></div>
    </div></div>
   </section>
+    </div>
+  </div>
 
+  <div class="chapter" id="ch3">
+    <button class="ch-head" onclick="toggleChapter('ch3')" aria-expanded="false">
+      <span class="ch-water">03</span>
+      <span class="ch-idx">03</span>
+      <span class="ch-emoji">🏦</span>
+      <span class="ch-meta">
+        <span class="ch-tag">CHAPTER 03</span>
+        <span class="ch-ttl">落地必办 · 三件大事</span>
+        <span class="ch-sub">到埗先搞定钱、卡、汇——银行开户、电话卡、跨境汇款一站说清。</span>
+        <span class="ch-chips">
+        <span class="ch-chip">🏦 银行开户</span>
+        <span class="ch-chip">📱 电话卡</span>
+        <span class="ch-chip">💸 跨境汇款</span>
+        </span>
+      </span>
+      <span class="ch-chev"><svg class="ico-svg"><use href="#ic-wallet"/></svg></span>
+    </button>
+
+<div class="ch-body">
+    
   <!-- ===== BANK ===== -->
   <section id="bank">
     <div class="eyebrow reveal">Bank Account</div>
@@ -694,7 +872,29 @@ h4.sub{font-family:var(--display);margin:18px 0 10px;font-size:18px;color:#463f5
     </div>
     <div class="call save reveal"><span class="ci">✅</span><div><b>省钱技巧：</b>比价用 Wise 的汇率页；避开周末与节假日汇（银行间休市汇率差）；大额分笔可能被风控，先问银行单笔上限。</div></div>
   </section>
+    </div>
+  </div>
 
+  <div class="chapter" id="ch4">
+    <button class="ch-head" onclick="toggleChapter('ch4')" aria-expanded="false">
+      <span class="ch-water">04</span>
+      <span class="ch-idx">04</span>
+      <span class="ch-emoji">💼</span>
+      <span class="ch-meta">
+        <span class="ch-tag">CHAPTER 04</span>
+        <span class="ch-ttl">工作与签证 · 合法回血</span>
+        <span class="ch-sub">弄清打工红线、校内兼职渠道与 WHV 打工度假，别因违规丢掉签证。</span>
+        <span class="ch-chips">
+        <span class="ch-chip">⏱ 打工规则</span>
+        <span class="ch-chip">🧑‍🎓 学生兼职</span>
+        <span class="ch-chip">✈️ WHV</span>
+        </span>
+      </span>
+      <span class="ch-chev"><svg class="ico-svg"><use href="#ic-clock"/></svg></span>
+    </button>
+
+<div class="ch-body">
+    
   <!-- ===== WORK ===== -->
   <section id="work">
     <div class="eyebrow reveal">Work Rights</div>
@@ -766,7 +966,32 @@ h4.sub{font-family:var(--display);margin:18px 0 10px;font-size:18px;color:#463f5
     </table>
     <div class="call warn reveal"><span class="ci">🚨</span><div><b>踩坑提醒：</b>中国大陆护照能直接申请的 WHV 很少（韩、日等有配额抽签），澳新加多对港台开放。务必以各国移民局官网当年公告为准，中介「保过」多为噱头。</div></div>
   </section>
+    </div>
+  </div>
 
+  <div class="chapter" id="ch5">
+    <button class="ch-head" onclick="toggleChapter('ch5')" aria-expanded="false">
+      <span class="ch-water">05</span>
+      <span class="ch-idx">05</span>
+      <span class="ch-emoji">🎓</span>
+      <span class="ch-meta">
+        <span class="ch-tag">CHAPTER 05</span>
+        <span class="ch-ttl">申请与选校 · 瞄准性价比</span>
+        <span class="ch-sub">专升本 / 考研 / 路线对比 / 专业就业 / 学历含金量 / 留学预算，逐层拆解。</span>
+        <span class="ch-chips">
+        <span class="ch-chip">🎓 专升本</span>
+        <span class="ch-chip">📚 考研</span>
+        <span class="ch-chip">⚖️ 韩国路线</span>
+        <span class="ch-chip">🧩 专业就业</span>
+        <span class="ch-chip">🏅 含金量</span>
+        <span class="ch-chip">💰 预算</span>
+        </span>
+      </span>
+      <span class="ch-chev"><svg class="ico-svg"><use href="#ic-edit"/></svg></span>
+    </button>
+
+<div class="ch-body">
+    
   <!-- ===== APPLY ===== -->
   <section id="apply">
     <div class="eyebrow reveal">Application &amp; Docs</div>
@@ -862,6 +1087,170 @@ AWARDS &amp; ACTIVITIES
 </div></div></div>
   </section>
 
+  <!-- ===== SCHOOL SELECTION GUIDE ===== -->
+  <section id="school">
+    <div class="eyebrow reveal">School Selection · 选校攻略</div>
+    <h2 class="sec reveal"><span class="sec-ico"><svg class="ico-svg"><use href="#ic-cap"></use></svg></span>选学校攻略 · 瞄准性价比</h2>
+    <p class="lead reveal">无论专升本、考研还是高中直读，<b>选对路径比盲目冲名校更省钱、更省时间</b>。下面按「专升本可报院校 → 考研推荐 → 韩国路线性价比 → 专业与就业 → 学历含金量 → 留学预算」逐层拆解，数据综合小红书 / 抖音 / 院校官网 / 留学机构公开信息（2025–2026），仅供参考，以官方简章为准。</p>
+
+    <div class="stats reveal">
+      <div class="stat"><b>11</b><span>国落地指南</span></div>
+      <div class="stat"><b>300+</b><span>可报院校</span></div>
+      <div class="stat"><b>¥4–18万</b><span>韩国年花费</span></div>
+      <div class="stat"><b>1/3–1/2</b><span>英美花费比例</span></div>
+    </div>
+
+    <!-- 决策流程 -->
+    <div class="flow reveal" style="margin-top:8px">
+      <div class="fnode"><span class="dot">1</span><h5>定预算</h5><p>家庭年可承受区间？锁定国家 / 城市 / 公办私立。</p></div>
+      <div class="fnode"><span class="dot">2</span><h5>选路径</h5><p>新入 / 插班(编入) / 专升本 / 考研，哪条最省时省钱。</p></div>
+      <div class="fnode"><span class="dot">3</span><h5>定层次</h5><p>SKY 冲刺 or 区域名校保底，看 GPA 与语言。</p></div>
+      <div class="fnode"><span class="dot">4</span><h5>选专业</h5><p>热门≠适合，结合产业与就业方向定赛道。</p></div>
+      <div class="fnode"><span class="dot">5</span><h5>算总账</h5><p>学费 + 生活 + 前期 + 保险 + 打工回血，做预算表。</p></div>
+    </div>
+
+    <!-- 专升本 -->
+    <h4 class="sub reveal" style="margin-top:34px">🎓 专升本可报考院校及要求（编入 / 3+1 / 3+2）</h4>
+    <p class="lead reveal" style="margin-bottom:14px">国内三年制专科毕业，可<b>编入（插班）韩国本科大三 / 大四</b>，部分项目中文 / 双语授课、可无 TOPIK 申请。下为 2025–2026 招生公开信息整理：</p>
+    <div class="glass reveal" style="padding:8px 8px 4px;overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th>院校</th><th>路径</th><th>授课语言</th><th>申请要求</th><th>年学费(约¥)</th><th>亮点</th></tr></thead>
+      <tbody>
+        <tr><td class="sk">全州大学</td><td>3+1 插大四</td><td>中韩双语</td><td>3年制专科毕业；可无 TOPIK，入学后韩语课(100h)</td><td>3.96万(经营/全球文化)<br>4.56万(航空)<br>5.03万(设计/AI/机械)</td><td>总费用低、市中心、保障宿舍、推荐就业</td></tr>
+        <tr><td class="sk">大邱大学</td><td>3+1 / 3+2</td><td>中文授课</td><td>插大三：本科2年/专科毕业；插大四：3年制专科；须中国籍母语汉语</td><td>人文1.84万/学期<br>理科2.36万<br>工学2.53万<br>艺能2.68万</td><td>中文授课、QS亚洲801-850、奖学金多</td></tr>
+        <tr><td class="sk">东新大学</td><td>3+1 / 3+2</td><td>双语</td><td>专科毕业；4年级插班需同专业/系列(经营·计算机可跨)</td><td>约1.58–1.88万/学期</td><td>专业多、部分可跨专业、双语</td></tr>
+        <tr><td class="sk">忠北保健大学</td><td>3+1(1年制)</td><td>双语</td><td>3年制全日制专科·护理/助产；总学分≥110</td><td>约2.55万/年(含翻译·语学)</td><td>护理专、无语言毕业要求、护资奖学金</td></tr>
+        <tr><td class="sk">SKY 等名校插班</td><td>插大二/大三</td><td>韩语</td><td>本科在读完成1–2年；TOPIK4+；同专业优先，竞争激烈</td><td>私立4–8万/年</td><td>含金量高但名额少、门槛高</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="call save reveal"><span class="ci">💡</span><div><b>性价比提示：</b>「中文/双语授课 + 无语言要求 + 1年制」的 3+1 项目，是用最低语言门槛拿中留服认证本科的最快路径；若冲 SKY 插班，优先准备 TOPIK4+ 与高 GPA，并提前核对<b>学分转换规则</b>，避免毕业延期。</div></div>
+
+    <!-- 考研 -->
+    <h4 class="sub reveal" style="margin-top:34px">📚 考研推荐院校（大学院）</h4>
+    <p class="lead reveal" style="margin-bottom:14px">韩国硕士多为 2 年制，学费普遍低于英美；SKY 与专业强校在传媒、商科、IT、设计领域就业竞争力强。</p>
+    <div class="glass reveal" style="padding:8px 8px 4px;overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th>院校</th><th>QS 2025</th><th>强势方向</th><th>语言要求</th><th>学制/学费参考</th></tr></thead>
+      <tbody>
+        <tr><td class="sk">首尔大学 SNU</td><td>31</td><td>全学科；传媒/工科/法学</td><td>TOPIK5–6 或 英(托福90+/雅思6.5+)</td><td>2年；约3.1万/学期</td></tr>
+        <tr><td class="sk">延世大学</td><td>56</td><td>传媒/经营/医学/国际</td><td>TOPIK5+ 或 英90+</td><td>2年；约2.4万/学期</td></tr>
+        <tr><td class="sk">高丽大学</td><td>67</td><td>经营(全韩No.1)/法学/传媒</td><td>TOPIK5+ 或 英80+</td><td>2年；约3.1万/学期</td></tr>
+        <tr><td class="sk">成均馆大学</td><td>114</td><td>半导体/商科/人文</td><td>TOPIK5+</td><td>2年</td></tr>
+        <tr><td class="sk">汉阳大学</td><td>155</td><td>IT/工科/设计</td><td>TOPIK4+ 或 英</td><td>2年</td></tr>
+        <tr><td class="sk">中央大学</td><td>—</td><td>影视传媒/艺术(韩国TOP1)</td><td>TOPIK4+</td><td>2年</td></tr>
+        <tr><td class="sk">庆熙/东国/梨花/西江/弘益</td><td>—</td><td>按专业：传媒·经营·设计·韩语教育</td><td>TOPIK4–5+</td><td>2年</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="call info reveal"><span class="ci">🧭</span><div><b>选校逻辑：</b>综合排名看 SKY/KAIST/POSTECH；<b>专业排名</b>看特色校（传媒→中央/东国，设计→弘益，经营→高丽/延世/SKKU，半导体→成均馆）。排名口径不一（高丽亦见 61/73），以当年 QS 与专业评估为准。</div></div>
+
+    <!-- 路线性价比 -->
+    <h4 class="sub reveal" style="margin-top:34px">⚖️ 韩国路线性价比：高中直读 vs 国内读1–2年再转学插班</h4>
+    <p class="lead reveal" style="margin-bottom:14px">严格说「高中毕业直接插班」不成立——<b>插班(编入)需要前置大学学分</b>。现实是两选一：A 高中毕业直读韩国本科（新入，4年）；B 国内先读 1–2 年再转学插班韩国大二/大三。</p>
+    <div class="grid g2 reveal">
+      <div class="card hov">
+        <div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-plane"></use></svg></div>
+        <h4>A · 高中毕业直读（新入）</h4>
+        <p><b>学制：</b>本科4年（可能先读0.5–1年语学院）。<br><b>费用：</b>首尔私立本科约10–16万/年，整体更高。<br><b>专业：</b>任意换专业，无跨专业限制。<br><b>语言：</b>TOPIK3+（新生门槛略低）。<br><b>适配：</b>想完整体验校园、彻底转专业、预算充足。</p>
+      </div>
+      <div class="card hov">
+        <div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-compass"></use></svg></div>
+        <h4>B · 国内读1–2年再转学插班</h4>
+        <p><b>学制：</b>国内1–2年 + 韩国2–3年 ≈ 3–4年，省1–2年。<br><b>费用：</b>省下1–2年学费生活费，整体更低。<br><b>专业：</b>多限相关/相近专业，跨专业难。<br><b>语言：</b>TOPIK4+（插班要求更高）+ 国内成绩。<br><b>适配：</b>想省时省钱、专业已定、急于拿证。</p>
+      </div>
+    </div>
+    <div class="call save reveal"><span class="ci">✅</span><div><b>结论：</b>目标是「省钱 + 快速拿正规本科 + 专业已定」→ <b>B（国内读1–2年再转学插班）性价比更高</b>；想彻底换专业、体验完整韩国本科、预算充足 → A 直读更合适。两条路径学历同为中留服认证正规本科。</div></div>
+
+    <!-- 专业 -->
+    <h4 class="sub reveal" style="margin-top:34px">🧩 专业报考：热门 &amp; 推荐方向</h4>
+    <div class="grid g3 reveal">
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-send"></use></svg></div><h4>传媒</h4><p><b>推荐：</b>中央·东国·庆熙·成均馆·汉阳·首尔<br><b>就业：</b>记者/PD/编导/广告/新媒体运营</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-brief"></use></svg></div><h4>经营学</h4><p><b>推荐：</b>高丽·延世·SKKU·西江·汉阳<br><b>就业：</b>金融/市场/咨询/创业，百搭商科</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-key"></use></svg></div><h4>计算机 / AI</h4><p><b>推荐：</b>首尔·SKKU·汉阳·KAIST·世宗<br><b>就业：</b>算法/开发/金融科技，年薪高</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-star"></use></svg></div><h4>设计 / 视觉</h4><p><b>推荐：</b>弘益·中央·国民·梨花<br><b>就业：</b>UI/产品/时尚设计，亚洲领先</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-wallet"></use></svg></div><h4>经济学 / 金融</h4><p><b>推荐：</b>首尔·延世·高丽·SKKU<br><b>就业：</b>银行/证券/贸易/保险</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-heart"></use></svg></div><h4>文化艺术经营</h4><p><b>推荐：</b>东国·中央·庆熙·汉阳<br><b>就业：</b>韩流内容/策展/经纪公司</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-book"></use></svg></div><h4>国语国文 / 韩语教育</h4><p><b>推荐：</b>首尔·高丽·延世·外大<br><b>就业：</b>高校/国际学校/翻译/研究</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-leaf"></use></svg></div><h4>美容艺术</h4><p><b>推荐：</b>西京·中央·檀国<br><b>就业：</b>造型/化妆/美业创业，全球领先</p></div>
+    </div>
+
+    <!-- 毕业方向 -->
+    <h4 class="sub reveal" style="margin-top:34px">🚀 专业毕业发展方向</h4>
+    <div class="glass reveal" style="padding:8px 8px 4px;overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th>专业方向</th><th>国内就业</th><th>留韩就业</th><th>贴士</th></tr></thead>
+      <tbody>
+        <tr><td class="sk">传媒</td><td>互联网/影视/广告/新媒体</td><td>韩流内容/电视台/经纪</td><td>韩语 + 作品集是核心</td></tr>
+        <tr><td class="sk">经营/商科</td><td>金融/快消/咨询/创业</td><td>跨国企业/贸易公司</td><td>AACSB 认证校更吃香</td></tr>
+        <tr><td class="sk">计算机/AI</td><td>大厂/算法/开发</td><td>三星/LG/游戏公司</td><td>实习 + 项目，年薪高</td></tr>
+        <tr><td class="sk">设计</td><td>UI/产品/时尚</td><td>设计工作室/品牌</td><td>作品集 > 文凭</td></tr>
+        <tr><td class="sk">韩语教育/国语国文</td><td>高校/国际学校/翻译</td><td>语学院教师/翻译</td><td>TOPIK6+ 竞争力</td></tr>
+        <tr><td class="sk">美容艺术</td><td>美业/造型/创业</td><td>美容机构/化妆</td><td>实践导向，重技术</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- 含金量 -->
+    <h4 class="sub reveal" style="margin-top:34px">🏅 各大高校学历含金量（分层参考）</h4>
+    <div class="grid g3 reveal">
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-star"></use></svg></div><h4>第一梯队</h4><p><b>SKY</b>(首尔/高丽/延世) + <b>KAIST</b> + <b>POSTECH</b>。QS 前100，对标国内 985 前列，跨国企业/选调/高校认可度高。</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-map"></use></svg></div><h4>第二梯队</h4><p>成均馆/汉阳/中央(传媒影视)/庆熙/西江/梨花/东国/弘益(设计)/釜山国立。特定专业含金量极高。</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-pin"></use></svg></div><h4>第三梯队</h4><p>地方国立/普通私立。认证可但 HR 认知低，需靠专业 + 能力补足。慎选"保录/无语言/速成"项目。</p></div>
+    </div>
+    <div class="call warn reveal"><span class="ci">🚨</span><div><b>避坑：</b>韩国正规大学回国 100% 认证（中韩学历互认），但<b>学校层次决定含金量起点</b>。部分地方私立为吸生源放宽录取，"保录/无语言/速成"项目慎选；优先查<b>中留服认证名单 + 专业实力</b>，选对赛道比光环更重要。</div></div>
+
+    <!-- 预算 -->
+    <h4 class="sub reveal" style="margin-top:34px">💰 留学预算提示（最重要）</h4>
+    <div class="call warn reveal"><span class="ci">⚠️</span><div><b>先算总账再出发。</b>下面年花费 = 学费 + 生活费；<b>不含</b>前期(公证/申请/签证/机票/存款证明约1.5–3万)与保险(约2400–3000/年)。汇率按 1¥≈180韩元 估算，会浮动。</div></div>
+    <div class="glass reveal" style="padding:8px 8px 4px;overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th>类型</th><th>学费/年(¥)</th><th>生活费/年(¥)</th><th>合计/年(¥)</th></tr></thead>
+      <tbody>
+        <tr><td class="sk">首尔 国立(本科)</td><td>2–3万</td><td>6–8万</td><td>8–11万</td></tr>
+        <tr><td class="sk">首尔 私立(本科)</td><td>4–8万(热门8–10万)</td><td>6–8万</td><td>11–18万</td></tr>
+        <tr><td class="sk">地方 国立(本科)</td><td>1.3–2.5万</td><td>3–5万</td><td>4.3–7.5万</td></tr>
+        <tr><td class="sk">地方 私立(本科)</td><td>2.5–4万</td><td>4–6万</td><td>6.5–10万</td></tr>
+        <tr><td class="sk">语学院(首尔)</td><td>3.2–4万</td><td>6–8万</td><td>9–12万</td></tr>
+        <tr><td class="sk">硕士 公立</td><td>2–5万</td><td>视地区</td><td>7–14万</td></tr>
+        <tr><td class="sk">硕士 私立</td><td>5–10万</td><td>视地区</td><td>12–18万</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="grid g3 reveal" style="margin-top:16px">
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-star"></use></svg></div><h4>奖学金</h4><p>TOPIK4 减30–50%，6级可全免(汉阳等)；GPA3.5+ 减50–100%；政府 GKS 全额(学费+生活)。</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-wallet"></use></svg></div><h4>合法打工</h4><p>每周≤20h，时薪¥45–60，月入1800–3000；假期全职月入8000–10000，回血可观。</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-house"></use></svg></div><h4>住宿优化</h4><p>校内宿舍比校外省30–50%；合租更省；首选地方城市，生活费低30–40%。</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-leaf"></use></svg></div><h4>生活优化</h4><p>自炊比外食省40–50%；学生折扣；T-money 交通卡换乘优惠。</p></div>
+      <div class="card hov"><div class="ic" style="width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--coral-s);color:var(--coral);margin-bottom:8px"><svg class="ico-svg" style="width:24px;height:24px"><use href="#ic-key"></use></svg></div><h4>预算红线</h4><p>预留应急1–2万 + 往返机票6000–12000 + 存款证明冻结约15万(不计入花费但需备)。</p></div>
+    </div>
+    <div class="call info reveal"><span class="ci">🌏</span><div><b>横向性价比：</b>韩国年花费约为英美澳加的 <b>1/3–1/2</b>，工薪家庭友好；马来西亚/泰国更低(6–10万)但学历认可度弱；日本10–20万；新加坡25–35万；英美澳加35–70万。预算有限优先韩国地方国立 + 奖学金 + 打工。</div></div>
+
+    <p class="lead reveal" style="margin-top:24px;font-size:13px;color:var(--muted)">※ 以上学费 / 生活费 / 排名为 2025–2026 公开信息整理（来源：各院校官网、小红书 / 抖音留学博主经验帖、启德 / 新东方 / 金吉列等机构统计），仅供参考。申请要求、费用、招生日程每年变动，<b>务必以目标院校当年官方招生简章为准</b>。</p>
+  </section>
+    </div>
+  </div>
+
+  <div class="chapter" id="ch6">
+    <button class="ch-head" onclick="toggleChapter('ch6')" aria-expanded="false">
+      <span class="ch-water">06</span>
+      <span class="ch-idx">06</span>
+      <span class="ch-emoji">🏠</span>
+      <span class="ch-meta">
+        <span class="ch-tag">CHAPTER 06</span>
+        <span class="ch-ttl">生活落地 · 住得安心</span>
+        <span class="ch-sub">租房区域利弊 + 生活锦囊，把琐碎但要紧的事一次讲透。</span>
+        <span class="ch-chips">
+        <span class="ch-chip">🏠 租房区域</span>
+        <span class="ch-chip">💡 生活锦囊</span>
+        <span class="ch-chip">🚨 避坑</span>
+        </span>
+      </span>
+      <span class="ch-chev"><svg class="ico-svg"><use href="#ic-house"/></svg></span>
+    </button>
+
+<div class="ch-body">
+    
   <!-- ===== RENTAL ===== -->
   <section id="rental">
     <div class="eyebrow reveal">Housing &amp; Furniture</div>
@@ -884,7 +1273,29 @@ AWARDS &amp; ACTIVITIES
     <p class="lead reveal">点开每条看详情——这些是出国前未必有人告诉你的「常识」。</p>
     <div id="acc"><div class="acc open"><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-doc"></use></svg></span>证件与备份<span class="plus">+</span></div><div class="acc-b">护照、签证、录取信、保险、学历公证——扫描存云盘 + 随身 U 盘 + 国内家人备份各一份。护照遗失先联系当地中国使领馆补办旅行证。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-phone"></use></svg></span>紧急电话与使领馆<span class="plus">+</span></div><div class="acc-b">当地报警/急救(如美 911、英 999、澳 000、日 110/119)。中国全球领事保护与服务应急热线：+86-10-12308（24h）。把使馆领保电话存手机。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-wallet"></use></svg></span>防诈骗<span class="plus">+</span></div><div class="acc-b">警惕「使馆/税局/快递」来电索要钱或验证码；不点陌生链接；租房/换汇只走官方渠道。海外电信诈骗高发，涉及「账户异常」「包裹被扣」一律挂断核实。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-house"></use></svg></span>租房避坑<span class="plus">+</span></div><div class="acc-b">实地/视频看房；读租约；做物业状况报告并拍照留证；押金进官方托管。任何「未看房先付款」基本是诈骗。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-heart"></use></svg></span>医疗保险<span class="plus">+</span></div><div class="acc-b">多数国家强制/强烈建议买医保（澳洲 OSHC、英国 IHS、美国学校保险）。看病先去 GP/校医，急诊才去 ER，否则账单惊人。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-key"></use></svg></span>驾照与国际驾照<span class="plus">+</span></div><div class="acc-b">短期可用国际驾照(IDP)或国内公证翻译；长期需换本地驾照。注意部分国家 IDP 须在国内提前办，到了再办不行。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-compass"></use></svg></span>插座与电压<span class="plus">+</span></div><div class="acc-b">英/澳/新/港用英标(三方)；美/日用美标(两扁)；欧陆用欧标。电压多为 220–240V，美国 110V。带一个万能转换头 + 插线板。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-coffee"></use></svg></span>小费文化<span class="plus">+</span></div><div class="acc-b">美国餐饮约 15–20%、英国 rounding、澳洲新西兰一般不给、日韩不给。搞错不会出事，但入乡随俗更得体。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-leaf"></use></svg></span>报税与退税<span class="plus">+</span></div><div class="acc-b">打工/有收入常需年度报税，学生多可退部分税（如美 OPT、加 T4、澳 TFN）。保留工资单与税号；不懂问学校国际处或免费税务诊所。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-star"></use></svg></span>必备 APP<span class="plus">+</span></div><div class="acc-b">地图(Google/Maps.me 离线)、翻译、银行 App、交通(各国不同)、外卖、二手(当地版)、汇率(Wise)。落地前下好。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-globe"></use></svg></span>心理健康<span class="plus">+</span></div><div class="acc-b">文化冲击、孤独、学业压力正常。学校多免费心理咨询(Counselling)；中国学联/同乡群是重要支持。别硬扛，求助是强者的行为。</div></div><div class="acc "><div class="acc-h" onclick="this.parentNode.classList.toggle(&#39;open&#39;)"><span class="ic"><svg class="ico-svg"><use href="#ic-pin"></use></svg></span>社交与安全<span class="plus">+</span></div><div class="acc-b">参加学校 Orientation、学联活动、本地社群快速融入。夜间出行走亮处、分享定位；贵重证件分开存放。</div></div></div>
   </section>
+    </div>
+  </div>
 
+  <div class="chapter" id="ch7">
+    <button class="ch-head" onclick="toggleChapter('ch7')" aria-expanded="false">
+      <span class="ch-water">07</span>
+      <span class="ch-idx">07</span>
+      <span class="ch-emoji">💬</span>
+      <span class="ch-meta">
+        <span class="ch-tag">CHAPTER 07</span>
+        <span class="ch-ttl">联系我们 · 随时答疑</span>
+        <span class="ch-sub">扫码加微信，或加入社群，落地路上有人陪。</span>
+        <span class="ch-chips">
+        <span class="ch-chip">💬 微信</span>
+        <span class="ch-chip">📩 咨询</span>
+        <span class="ch-chip">👥 社群</span>
+        </span>
+      </span>
+      <span class="ch-chev"><svg class="ico-svg"><use href="#ic-phone"/></svg></span>
+    </button>
+
+<div class="ch-body">
+    
   <!-- ===== CONTACT ===== -->
   <section class="contact-sec" id="contact">
     <div class="contact-card reveal">
@@ -894,6 +1305,10 @@ AWARDS &amp; ACTIVITIES
       <div class="hint">扫码添加，获取 1v1 留学规划与落地支持</div>
     </div>
   </section>
+    </div>
+  </div>
+
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <div class="foot reveal">
@@ -1430,7 +1845,6 @@ const BRIEF = {
   }
 };
 
-
 function stars(n){let s='';for(let i=1;i<=5;i++)s+= i<=n?'★':'<span class="off">★</span>';return s;}
 function furnitureFor(code){
   const F={
@@ -1703,32 +2117,41 @@ renderCK();
 
 /* ===== scroll spy + progress + reveal + ripple ===== */
 const pills=document.getElementById('navpills');
-const secs=[...document.querySelectorAll('section')];
-const ACCENT={
-  hero:['#bda4ec','#efe9fc'], overview:['#bda4ec','#efe9fc'],
-  explorer:['#9cc4ec','#eaf3fc'], bank:['#9cc4ec','#eaf3fc'],
-  sim:['#8fd9b4','#e7f7ef'], remit:['#8ed3a4','#e8f6ee'],
-  work:['#f6c79a','#fdf2e7'], parttime:['#f3a6c4','#fdeaf2'],
-  whv:['#f6c79a','#fdf2e7'], apply:['#bda4ec','#efe9fc'],
-  rental:['#f3a6c4','#fdeaf2'],   tips:['#84c8d8','#e6f5f8'],
-  contact:['#bda4ec','#efe9fc']
+const chapters=[...document.querySelectorAll('.chapter')];
+const CH_ACCENT={
+  ch1:['#bda4ec','#efe9fc'], ch2:['#9cc4ec','#eaf3fc'],
+  ch3:['#8fd9b4','#e7f7ef'], ch4:['#f6c79a','#fdf2e7'],
+  ch5:['#f3a6c4','#fdeaf2'], ch6:['#84c8d8','#e6f5f8'],
+  ch7:['#bda4ec','#efe9fc']
 };
 let curAccent='';
 function onScroll(){
   const sc=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight;
   document.getElementById('pbar').style.width=(dh>0?sc/dh*100:0)+'%';
-  let cur=secs[0].id;
-  secs.forEach(s=>{if(s.getBoundingClientRect().top<=120)cur=s.id;});
+  let cur='hero';
+  chapters.forEach(s=>{if(s.getBoundingClientRect().top<=140)cur=s.id;});
   pills.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
-  if(cur!==curAccent && ACCENT[cur]){
+  if(CH_ACCENT[cur]){
     curAccent=cur;
-    document.documentElement.style.setProperty('--accent',ACCENT[cur][0]);
-    document.documentElement.style.setProperty('--accent-soft',ACCENT[cur][1]);
+    document.documentElement.style.setProperty('--accent',CH_ACCENT[cur][0]);
+    document.documentElement.style.setProperty('--accent-soft',CH_ACCENT[cur][1]);
   }
   document.getElementById('totop').classList.toggle('show',sc>500);
 }
 window.addEventListener('scroll',onScroll,{passive:true});
-function goSection(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+function openChapterOf(el){if(!el)return;const ch=el.closest('.chapter');if(!ch)return;if(!ch.classList.contains('open')){ch.classList.add('open');const h=ch.querySelector('.ch-head');if(h)h.setAttribute('aria-expanded','true');}ch.querySelectorAll('.reveal:not(.in)').forEach(x=>x.classList.add('in'));}
+function toggleChapter(id){const ch=document.getElementById(id);if(!ch)return;const open=ch.classList.toggle('open');const h=ch.querySelector('.ch-head');if(h)h.setAttribute('aria-expanded',open);if(open)ch.querySelectorAll('.reveal:not(.in)').forEach(x=>x.classList.add('in'));}
+function goSection(id){const el=document.getElementById(id);if(!el)return;openChapterOf(el);el.scrollIntoView({behavior:'smooth'});}
+document.querySelectorAll('#navpills a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',ev=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    if(!el)return;
+    ev.preventDefault();
+    openChapterOf(el);
+    el.scrollIntoView({behavior:'smooth'});
+  });
+});
 
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
@@ -1737,8 +2160,8 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('.btn');
   if(b){const r=document.createElement('span');r.className='ripple';const rect=b.getBoundingClientRect();const sz=Math.max(rect.width,rect.height);r.style.width=r.style.height=sz+'px';r.style.left=(e.clientX-rect.left-sz/2)+'px';r.style.top=(e.clientY-rect.top-sz/2)+'px';b.appendChild(r);setTimeout(()=>r.remove(),600);}
 });
+document.querySelectorAll('.chapter.open .reveal').forEach(el=>el.classList.add('in'));
 onScroll();
 </script>
-
 
 </body></html>
